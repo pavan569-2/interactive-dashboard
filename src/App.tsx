@@ -1,34 +1,75 @@
 ﻿import { dashboardData } from "./data/dashboardData";
+import Header from "./components/Header";
+import KpiCard from "./components/KpiCard";
+import TasksVelocityChart from "./components/TasksVelocityChart";
+import OpenTasksChart from "./components/OpenTasksChart";
+import SprintCompletionChart from "./components/SprintCompletionChart";
 
-function App() {
-  const { projectName, snapshots } = dashboardData;
+export default function App() {
+  const { projectName, velocityUnit, snapshots } = dashboardData;
+
+  // KPI values from the most recent month
+  const latest = snapshots[snapshots.length - 1];
+
+  // Totals / averages across all 12 months
+  const totalTasksCompleted = snapshots.reduce((sum, s) => sum + s.tasksCompleted, 0);
+  const avgVelocity = Math.round(
+    snapshots.reduce((sum, s) => sum + s.teamVelocity, 0) / snapshots.length
+  );
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 p-8">
-      <h1 className="text-3xl font-bold text-indigo-400 mb-6">
-        {projectName} — Dashboard
-      </h1>
+    <div className="min-h-screen bg-gray-950 text-gray-100">
+      <Header projectName={projectName} />
 
-      <p className="text-gray-400 mb-4">
-        Showing {snapshots.length} months of KPI data.
-      </p>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
 
-      <ul className="space-y-2">
-        {snapshots.map((s) => (
-          <li
-            key={s.yearMonth}
-            className="flex gap-6 bg-gray-800 rounded-lg px-4 py-3 text-sm"
-          >
-            <span className="w-24 font-medium text-gray-300">{s.month}</span>
-            <span>Tasks completed: <strong>{s.tasksCompleted}</strong></span>
-            <span>Velocity: <strong>{s.teamVelocity}</strong> pts</span>
-            <span>Open tasks: <strong>{s.openTasks}</strong></span>
-            <span>Sprint: <strong>{s.sprintCompletionPct}%</strong></span>
-          </li>
-        ))}
-      </ul>
+        {/* KPI Cards */}
+        <section aria-label="Key performance indicators">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <KpiCard
+              title="Tasks Completed"
+              value={latest.tasksCompleted}
+              subtitle={`${totalTasksCompleted} total over 12 months`}
+            />
+            <KpiCard
+              title="Team Velocity"
+              value={`${latest.teamVelocity}`}
+              subtitle={`${velocityUnit} · avg ${avgVelocity} / month`}
+            />
+            <KpiCard
+              title="Open Tasks"
+              value={latest.openTasks}
+              subtitle={`as of ${latest.month}`}
+            />
+            <KpiCard
+              title="Sprint Completion"
+              value={`${latest.sprintCompletionPct}%`}
+              subtitle={`latest sprint · ${latest.month}`}
+            />
+          </div>
+        </section>
+
+        {/* Charts — top row */}
+        <section aria-label="Trend charts">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="lg:col-span-2">
+              <TasksVelocityChart snapshots={snapshots} />
+            </div>
+            <div>
+              <SprintCompletionChart
+                value={latest.sprintCompletionPct}
+                month={latest.month}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Charts — bottom row */}
+        <section aria-label="Open tasks chart">
+          <OpenTasksChart snapshots={snapshots} />
+        </section>
+
+      </main>
     </div>
   );
 }
-
-export default App;
