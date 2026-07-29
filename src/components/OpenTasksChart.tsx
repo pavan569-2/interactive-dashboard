@@ -1,4 +1,4 @@
-﻿import {
+import {
   BarChart,
   Bar,
   XAxis,
@@ -15,7 +15,10 @@ interface OpenTasksChartProps {
 
 export default function OpenTasksChart({ snapshots }: OpenTasksChartProps) {
   return (
-    <div className="bg-gray-800 rounded-xl border border-gray-700 p-5">
+    <div
+      className="bg-gray-800 rounded-xl border border-gray-700 p-5"
+      aria-label="Open tasks bar chart"
+    >
       <h2 className="text-base font-semibold text-white mb-4">
         Open Tasks per Month
       </h2>

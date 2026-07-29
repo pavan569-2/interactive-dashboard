@@ -1,4 +1,4 @@
-﻿/**
+/**
  * dashboardData.ts
  * -----------------
  * Mock data for the Project Tracker Dashboard.
@@ -15,11 +15,17 @@
  * A single KPI snapshot for one calendar month.
  */
 export interface MonthlySnapshot {
-  /** Full month label, e.g. "Aug 2024" */
+  /** Full month label, e.g. "Aug 2025" */
   month: string;
 
-  /** ISO year-month string for sorting/keying, e.g. "2024-08" */
+  /** ISO year-month string for sorting/keying, e.g. "2025-08" */
   yearMonth: string;
+
+  /**
+   * ISO date string for the first day of the month ("YYYY-MM-01").
+   * Use with `new Date(isoDate)` for safe, cross-engine date parsing.
+   */
+  isoDate: string;
 
   /** Total number of tasks marked done during this month. */
   tasksCompleted: number;
@@ -65,7 +71,7 @@ export interface DashboardData {
 // ---------------------------------------------------------------------------
 
 /**
- * 12 months of mock data (Aug 2024 - Jul 2025).
+ * 12 months of mock data (Aug 2025 - Jul 2026).
  *
  * Variance rationale:
  *  - Q4 (Oct-Dec) shows a dip typical of holiday slowdowns then a push.
@@ -76,96 +82,108 @@ export interface DashboardData {
  */
 const snapshots: MonthlySnapshot[] = [
   {
-    month: "Aug 2024",
-    yearMonth: "2024-08",
+    month: "Aug 2025",
+    yearMonth: "2025-08",
+    isoDate: "2025-08-01",
     tasksCompleted: 47,
     teamVelocity: 62,
     openTasks: 34,
     sprintCompletionPct: 78,
   },
   {
-    month: "Sep 2024",
-    yearMonth: "2024-09",
+    month: "Sep 2025",
+    yearMonth: "2025-09",
+    isoDate: "2025-09-01",
     tasksCompleted: 53,
     teamVelocity: 68,
     openTasks: 31,
     sprintCompletionPct: 82,
   },
   {
-    month: "Oct 2024",
-    yearMonth: "2024-10",
+    month: "Oct 2025",
+    yearMonth: "2025-10",
+    isoDate: "2025-10-01",
     tasksCompleted: 41,
     teamVelocity: 55,
     openTasks: 38,
     sprintCompletionPct: 71,
   },
   {
-    month: "Nov 2024",
-    yearMonth: "2024-11",
+    month: "Nov 2025",
+    yearMonth: "2025-11",
+    isoDate: "2025-11-01",
     tasksCompleted: 38,
     teamVelocity: 50,
     openTasks: 42,
     sprintCompletionPct: 68,
   },
   {
-    month: "Dec 2024",
-    yearMonth: "2024-12",
+    month: "Dec 2025",
+    yearMonth: "2025-12",
+    isoDate: "2025-12-01",
     tasksCompleted: 44,
     teamVelocity: 58,
     openTasks: 36,
     sprintCompletionPct: 74,
   },
   {
-    month: "Jan 2025",
-    yearMonth: "2025-01",
+    month: "Jan 2026",
+    yearMonth: "2026-01",
+    isoDate: "2026-01-01",
     tasksCompleted: 39,
     teamVelocity: 52,
     openTasks: 45,
     sprintCompletionPct: 70,
   },
   {
-    month: "Feb 2025",
-    yearMonth: "2025-02",
+    month: "Feb 2026",
+    yearMonth: "2026-02",
+    isoDate: "2026-02-01",
     tasksCompleted: 46,
     teamVelocity: 61,
     openTasks: 40,
     sprintCompletionPct: 76,
   },
   {
-    month: "Mar 2025",
-    yearMonth: "2025-03",
+    month: "Mar 2026",
+    yearMonth: "2026-03",
+    isoDate: "2026-03-01",
     tasksCompleted: 55,
     teamVelocity: 72,
     openTasks: 33,
     sprintCompletionPct: 85,
   },
   {
-    month: "Apr 2025",
-    yearMonth: "2025-04",
+    month: "Apr 2026",
+    yearMonth: "2026-04",
+    isoDate: "2026-04-01",
     tasksCompleted: 60,
     teamVelocity: 78,
     openTasks: 29,
     sprintCompletionPct: 88,
   },
   {
-    month: "May 2025",
-    yearMonth: "2025-05",
+    month: "May 2026",
+    yearMonth: "2026-05",
+    isoDate: "2026-05-01",
     tasksCompleted: 58,
     teamVelocity: 75,
     openTasks: 31,
     sprintCompletionPct: 86,
   },
   {
-    month: "Jun 2025",
-    yearMonth: "2025-06",
+    month: "Jun 2026",
+    yearMonth: "2026-06",
+    isoDate: "2026-06-01",
     tasksCompleted: 64,
     teamVelocity: 83,
     openTasks: 27,
     sprintCompletionPct: 92,
   },
   {
-    month: "Jul 2025",
-    yearMonth: "2025-07",
+    month: "Jul 2026",
+    yearMonth: "2026-07",
+    isoDate: "2026-07-01",
     tasksCompleted: 71,
     teamVelocity: 90,
     openTasks: 24,
