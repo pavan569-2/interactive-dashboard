@@ -1,4 +1,4 @@
-﻿import {
+import {
   RadialBarChart,
   RadialBar,
   ResponsiveContainer,
@@ -14,13 +14,13 @@ export default function SprintCompletionChart({ value, month }: SprintCompletion
   const data = [{ value }];
 
   return (
-    <div className="bg-gray-800 rounded-xl border border-gray-700 p-5 flex flex-col items-center">
+    <div className="bg-gray-800 rounded-xl border border-gray-700 p-5 flex flex-col items-center h-full">
       <h2 className="text-base font-semibold text-white mb-2 self-start">
         Sprint Completion Rate
       </h2>
       <p className="text-xs text-gray-400 mb-4 self-start">Latest: {month}</p>
 
-      <div className="relative w-full" style={{ height: 200 }}>
+      <div className="relative w-full h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <RadialBarChart
             cx="50%"

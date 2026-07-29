@@ -1,4 +1,4 @@
-﻿import { dashboardData } from "./data/dashboardData";
+import { dashboardData } from "./data/dashboardData";
 import Header from "./components/Header";
 import KpiCard from "./components/KpiCard";
 import TasksVelocityChart from "./components/TasksVelocityChart";
@@ -52,10 +52,10 @@ export default function App() {
         {/* Charts — top row */}
         <section aria-label="Trend charts">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 h-full">
               <TasksVelocityChart snapshots={snapshots} />
             </div>
-            <div>
+            <div className="h-full">
               <SprintCompletionChart
                 value={latest.sprintCompletionPct}
                 month={latest.month}
